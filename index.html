@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="main.css">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container"></div>
+  <script id="shader-fr" type="x-shader/x-fragment">
+    precision mediump float;
+    
+    uniform sampler2D u_image;
+    
+    uniform float sigma;
+    
+    varying vec2 v_texCoord;
+    varying vec2 v_resolution;
+
+    float gauss(in float x, in float sigma)
+    {
+      return 0.39894*exp(-0.5*x*x/(sigma*sigma))/sigma;
+    }
+    
+    void main() {
+      const int mSize = 11;
+      const int kSize = (mSize-1)/2;
+      float kernel[mSize];
+      vec4 final_colour = vec4(0.0);
+      
+      //create the 1-D kernel
+      float Z = 0.0;
+      for (int j = 0; j <= kSize; ++j)
+      {
+        kernel[kSize+j] = kernel[kSize-j] = gauss(float(j), sigma);
+      }
+      
+      //get the normalization factor (as the gaussian has been clamped)
+      for (int j = 0; j < mSize; ++j)
+      {
+        Z += kernel[j];
+      }
+      
+      //read out the texels
+      for (int i=-kSize; i <= kSize; ++i)
+      {
+        for (int j=-kSize; j <= kSize; ++j)
+        {
+          final_colour += kernel[kSize+j]*kernel[kSize+i]*texture2D(u_image, v_texCoord + vec2(float(i) / v_resolution.x,float(j) / v_resolution.y));
+        }
+      }
+      
+      gl_FragColor = (final_colour/(Z*Z));
+    }
+  </script>
+  <script id="shader-vs" type="x-shader/x-vertex">
+    attribute vec2 a_position;
+    attribute vec2 a_texCoord;
+    
+    uniform vec2 u_resolution;
+    
+    varying vec2 v_texCoord;
+    varying vec2 v_resolution;
+    
+    void main() {
+       // convert the rectangle from pixels to 0.0 to 1.0
+       vec2 zeroToOne = a_position / u_resolution;
+    
+       // convert from 0->1 to 0->2
+       vec2 zeroToTwo = zeroToOne * 2.0;
+    
+       // convert from 0->2 to -1->+1 (clipspace)
+       vec2 clipSpace = zeroToTwo - 1.0;
+    
+       gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
+    
+       // pass the texCoord to the fragment shader
+       // The GPU will interpolate this value between points.
+       v_texCoord = a_texCoord;
+       v_resolution = u_resolution;
+    }
+  </script>
+  <script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
+  <script type="text/javascript" src="dist/bundle.js"></script>
+</body>
+</html>
+
+<!-- precision mediump float;
+
+// our texture
+uniform sampler2D u_image;
+uniform float weights[5];
+
+// the texCoords passed in from the vertex shader.
+varying vec2 v_texCoord;
+
+void main() {
+  vec4 sum = vec4(0.0);
+  vec2 startDir = -0.5 * vec2(0.003, 0.003) * float(30);
+  for( int i = 1; i < 5; i++ ) 
+  {
+    sum += texture2D(u_image, v_texCoord + (0.003, 0.0)*float(i)) * 0.2; 
+  }
+
+  gl_FragColor = sum; -->

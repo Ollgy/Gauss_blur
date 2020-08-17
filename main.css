@@ -1,0 +1,259 @@
+html {
+  height: 100%;
+  
+}
+
+body {
+  height: 100%;
+  font-family: Arial;
+  color: #383434;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#container {
+  height: 100%;
+}
+
+h1 {
+  width: 100%;
+  text-align: center;
+
+}
+
+main {
+  display: flex;
+  padding: 15px;
+  min-height: 100%;
+}
+
+.section {
+  position: relative;
+  width: 50%;
+  padding: 20px;
+}
+
+.section--image {
+  border: 2px dotted #383434;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.panelblock {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.panelblock--powerbar {
+  width: 50%;
+  padding: 30px;
+  margin: 0 auto;
+}
+
+.panelblock--buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  margin-top: 50px;
+  font-size: 1.25rem;
+}
+
+.panelblock--buttons > * {
+  width: 50%;
+}
+
+.panelblock--buttons > .button--file {
+  margin-bottom: 15px;
+}
+
+.canvas.hidden {
+  visibility: hidden;
+}
+
+.powerbar {
+  width: 100%;
+  height: 20px;
+}
+
+input[type=file] {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+[type=file] + label {
+  display: inline-block;
+  width: 100%;
+  padding: 5px 10px;
+  text-align: center;
+  color: white;
+  background-color: grey;
+  cursor: pointer;
+  border-radius: 0.2rem;
+}
+
+button {
+  display: inline-block;
+  width: 100%;
+  padding: 5px 10px;
+  text-align: center;
+  color: white;
+  font-size: 1.25rem;
+  background-color: grey;
+  cursor: pointer;
+  border-radius: 0.2rem;
+  outline: none;
+  border: none;
+}
+
+[type=file]:focus + label, button:focus {
+  outline: 1px dotted grey;
+}
+
+[type=file] + label:hover, button:hover {
+  background-color: darkcyan;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%; 
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none; 
+}
+
+input[type=range]::-ms-track, input[type=range]::-webkit-track {
+  width: 100%;
+  cursor: pointer;
+  background: pink;
+  color: black;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+}
+ 
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+ 
+input[type=range]:focus {
+  outline: none;
+}
+ 
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #000000;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  margin-top: -14px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+ 
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+}
+ 
+input[type=range]::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: darkcyan;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: darkcyan;
+}
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: darkcyan;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: darkcyan;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: darkcyan;
+}
+input[type=range]::-ms-fill-upper {
+  background: darkcyan;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+  background: darkcyan;
+}
+
+.stub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+  font-size: 1.6rem;
+  color: #c5bcbc;
+}
